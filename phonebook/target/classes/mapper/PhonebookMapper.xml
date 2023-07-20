@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.PhonebookMapper">
+
+<insert id="insert">
+insert into phonebook values(phonebook_idx_seq.nextval,#{pb.name},#{pb.hp},#{pb.memo})
+</insert>
+
+<select id="getList" resultType="vo.PhonebookVO">
+select * from phonebook
+</select>
+
+<select id="find" resultType="vo.PhonebookVO">
+ select * from phonebook where name like  '%'||#{search}||'%' or hp like '%'||#{search}||'%' or memo like '%'||#{search}||'%'
+</select>
+
+<select id="findOne" resultType="vo.PhonebookVO">
+select * from phonebook where idx=#{idx}
+</select>
+
+<update id="update">
+update phonebook set name=#{pb.name},hp=#{pb.hp},memo=#{pb.memo} where idx=#{pb.idx}
+</update>
+
+<delete id="delete">
+delete from phonebook where idx=#{idx}
+</delete>
+
+</mapper>
